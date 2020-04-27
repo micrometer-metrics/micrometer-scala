@@ -1,4 +1,4 @@
-package io.micrometer.scala
+package io.micrometer.scala.design1
 
 import cats.effect.Sync
 import io.micrometer.core.instrument.Counter

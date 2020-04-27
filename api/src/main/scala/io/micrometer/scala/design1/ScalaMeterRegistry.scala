@@ -1,7 +1,8 @@
-package io.micrometer.scala
+package io.micrometer.scala.design1
 
 import cats.effect.Sync
 import io.micrometer.core.instrument._
+import io.micrometer.scala.ToDouble
 
 import scala.jdk.CollectionConverters._
 

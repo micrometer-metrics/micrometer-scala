@@ -1,4 +1,4 @@
-package io.micrometer.scala
+package io.micrometer.scala.design1
 
 import java.time.Duration
 import java.util.concurrent.{Callable, TimeUnit}
