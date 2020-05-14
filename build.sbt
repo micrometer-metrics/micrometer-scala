@@ -1,5 +1,5 @@
 ThisBuild / organization := "io.micrometer"
-ThisBuild / scalaVersion := "2.13.1"
+ThisBuild / scalaVersion := "2.13.2"
 ThisBuild / turbo := true
 Global / onChangedBuildSource := ReloadOnSourceChanges
 Global / cancelable := true
@@ -19,9 +19,10 @@ lazy val api = project
     name := "micrometer-scala-api",
     libraryDependencies ++= Seq(
       Dependencies.catsEffect,
+      Dependencies.jsr305,
       Dependencies.micrometerCore
     )
   )
 
-addCommandAlias("checkAll", "; scalafmtSbtCheck; scalafmtCheckAll; compile:scalafix --check; test:scalafix --check; +test")
-addCommandAlias("fixAll", "; compile:scalafix; test:scalafix; scalafmtSbt; scalafmtAll")
+addCommandAlias("check", "; scalafmtSbtCheck; scalafmtCheckAll; +test")
+addCommandAlias("fix", "; scalafmtSbt; scalafmtAll")

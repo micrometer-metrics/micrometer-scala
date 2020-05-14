@@ -16,13 +16,14 @@ class ScalaTimer[F[_]: Sync](delegate: Timer) {
 
   def record(duration: scala.concurrent.duration.Duration): F[Unit] = F.delay(delegate.record(duration.toNanos, TimeUnit.NANOSECONDS))
 
-  def wrap[A](block: => A): F[A] = F.delay {
-    delegate
-      .wrap(new Callable[A] {
-        override def call(): A = block
-      })
-      .call()
-  }
+  def wrap[A](block: => A): F[A] =
+    F.delay {
+      delegate
+        .wrap(new Callable[A] {
+          override def call(): A = block
+        })
+        .call()
+    }
 
   def wrap[A](f: F[A]): F[A] =
     Bracket[F, Throwable].bracket(F.delay(System.nanoTime))(_ => f)(start =>

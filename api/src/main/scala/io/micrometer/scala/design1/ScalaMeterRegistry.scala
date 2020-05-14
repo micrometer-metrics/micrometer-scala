@@ -16,10 +16,11 @@ class ScalaMeterRegistry[F[_]: Sync](delegate: MeterRegistry) {
 
   def gauge[A: ToDouble](name: String, number: A): F[ScalaGauge[F]] = gauge(name, List.empty, number)
 
-  def gauge[A: ToDouble](name: String, tags: Iterable[Tag], number: A): F[ScalaGauge[F]] = F.delay {
-    delegate.gauge[Double](name, tags.asJava, ToDouble[A].toDouble(number), (_: Double).doubleValue())
-    new ScalaGauge(delegate.get(name).gauge())
-  }
+  def gauge[A: ToDouble](name: String, tags: Iterable[Tag], number: A): F[ScalaGauge[F]] =
+    F.delay {
+      delegate.gauge[Double](name, tags.asJava, ToDouble[A].toDouble(number), (_: Double).doubleValue())
+      new ScalaGauge(delegate.get(name).gauge())
+    }
 
   def timer(name: String, tags: String*): F[ScalaTimer[F]] = F.delay(new ScalaTimer(delegate.timer(name, tags: _*)))
 

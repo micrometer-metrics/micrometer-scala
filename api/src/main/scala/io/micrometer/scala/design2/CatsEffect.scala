@@ -18,10 +18,11 @@ object CatsEffect {
 
     def gauge1[F[_]: Sync, A: ToDouble](name: String, number: A): F[Gauge] = gauge(name, List.empty, number)
 
-    def gauge[F[_]: Sync, A: ToDouble](name: String, tags: Iterable[Tag], number: A): F[Gauge] = Sync[F].delay {
-      delegate.gauge[Double](name, tags.asJava, ToDouble[A].toDouble(number), (_: Double).doubleValue())
-      delegate.get(name).gauge()
-    }
+    def gauge[F[_]: Sync, A: ToDouble](name: String, tags: Iterable[Tag], number: A): F[Gauge] =
+      Sync[F].delay {
+        delegate.gauge[Double](name, tags.asJava, ToDouble[A].toDouble(number), (_: Double).doubleValue())
+        delegate.get(name).gauge()
+      }
 
     def timer1[F[_]: Sync](name: String, tags: String*): F[Timer] = Sync[F].delay(delegate.timer(name, tags: _*))
 
