@@ -4,16 +4,17 @@ import java.util.concurrent.TimeUnit.MILLISECONDS
 
 import cats.effect.IO
 import io.micrometer.core.instrument.simple.SimpleMeterRegistry
+import io.micrometer.scala.CatsEffectMeterRegistry
 import org.scalatest.funsuite.AsyncFunSuite
 
 import scala.concurrent.ExecutionContext
 import scala.concurrent.duration.Duration
 
-class ScalaMeterRegistryTest extends AsyncFunSuite {
+class CatsEffectMeterRegistryTest extends AsyncFunSuite {
 
   test("ScalaMeterRegistry") {
     val javaRegistry = new SimpleMeterRegistry()
-    val scalaRegistry = new ScalaMeterRegistry[IO](javaRegistry)
+    val scalaRegistry = new CatsEffectMeterRegistry[IO](javaRegistry)
 
     val io = for {
       counter <- scalaRegistry.counter("test-counter")

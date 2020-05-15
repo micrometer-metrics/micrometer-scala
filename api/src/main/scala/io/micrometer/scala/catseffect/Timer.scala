@@ -1,12 +1,12 @@
-package io.micrometer.scala.design1
+package io.micrometer.scala.catseffect
 
 import java.time.Duration
 import java.util.concurrent.{Callable, TimeUnit}
 
 import cats.effect.{Bracket, Sync}
-import io.micrometer.core.instrument.Timer
+import io.micrometer.core.instrument.{Timer => Delegate}
 
-class ScalaTimer[F[_]: Sync](delegate: Timer) {
+class Timer[F[_]: Sync](delegate: Delegate) {
 
   private val F = Sync[F]
 

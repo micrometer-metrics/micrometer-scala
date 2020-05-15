@@ -1,9 +1,9 @@
-package io.micrometer.scala.design1
+package io.micrometer.scala.catseffect
 
 import cats.effect.Sync
-import io.micrometer.core.instrument.Counter
+import io.micrometer.core.instrument.{Counter => Delegate}
 
-class ScalaCounter[F[_]: Sync](delegate: Counter) {
+class Counter[F[_]: Sync](delegate: Delegate) {
 
   private val F = Sync[F]
 

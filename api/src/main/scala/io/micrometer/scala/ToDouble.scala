@@ -1,6 +1,6 @@
 package io.micrometer.scala
 
-trait ToDouble[A] {
+trait ToDouble[-A] {
 
   def toDouble(value: A): Double
 
