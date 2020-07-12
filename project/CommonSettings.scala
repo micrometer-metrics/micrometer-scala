@@ -5,8 +5,8 @@ object CommonSettings {
   object settingValues {
     val version = "1.0.0-SNAPSHOT"
 
-    val scalaVersion      = "2.13.1"
-    val crossScalaVersion = Seq("2.12.11", "2.13.1")
+    val scalaVersion      = "2.13.3"
+    val crossScalaVersion = Seq("2.12.11", "2.13.3")
 
     val organization = "com.igeolise.io.micrometer"
     val scalacOptions = Seq(
